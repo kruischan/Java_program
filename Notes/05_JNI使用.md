@@ -42,7 +42,7 @@ public class hardControl {
 }                                                                
 ```
 生成頭文件步驟：  
-- 先生成類  `javac hardControl.java`
+- 先生成類  `javac -d . hardControl.java`
 - 生成本地頭文件  `javah -jni com.example.hardControl`  
 > -jni可有可無，系統默認選項  
 
