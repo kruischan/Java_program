@@ -19,6 +19,14 @@ public class hardControl {
 
 }
 
+class accessService {
+	public static int persistion = 0;
+
+	if (!persistion) {
+		throw exception();
+	}
+}
+
 
 
 
