@@ -6,6 +6,7 @@
 ## **不帶包名**
 直接使用javah命令生成头文件  `javah nativeTest`  
 > 注意结尾不需要加`.java` 
+> javah命令可以使用*-o*选项指定输出头文件文件名
 
 编写c/c++函数，对应java源程序中使用`native`关键字声明的方法
 
