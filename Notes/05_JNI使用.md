@@ -25,43 +25,38 @@ System.loadLibrary只需指定库名就可以了，但是需把库拷贝至系�
 > hardControl.java源文件
 
 ```java
-package com.example;                                             
-                                                                 
-public class hardControl {                                       
-        static {                                                 
-                try {                                            
-                        System.loadLibrary("hardControl");       
-                } catch (Exception e) {                          
-                        e.printStackTrace();                     
-                }                                                
-        }                                                        
-                                                                 
+package com.example;
+public class hardControl {
+        static {
+                try {
+                        System.loadLibrary("hardControl");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+        }
         public static native int led_ctrl(int which, int status);
-        public static native int led_open();                     
-        public static native void led_close();                   
-                                                                 
-        public static void main(String args[]) {                 
-                                                                 
-        }                                                        
-                                                                 
-}                                                                
+        public static native int led_open();
+        public static native void led_close();
+        public static void main(String args[]) {
+        }
+}
 ```
 
 生成頭文件步驟：  
 
 - 先生成類  `javac -d . hardControl.java`
 - 生成本地頭文件  `javah -jni com.example.hardControl`  
+
 > -jni可有可無，系統默認選項  
 
-最後在當前目錄下生成com_example_hardControl.h文件 
-
+最後在當前目錄下生成com_example_hardControl.h文件
 
 ## **本地庫文件編譯**  
 
 Linux下生成`.so`文件時，最好指定`jni.h`頭文件的路徑
 
-``` 
-gcc -shared -I /usr/lib/jvm/java-1.8.0-openjdk-amd64/include/ -I /usr/lib/jvm/java-1.8.0-openjdk-amd64/include/linux/ -fPIC nativeTest.c -o libnativeTest.so                                          
+```c
+gcc -shared -I /usr/lib/jvm/java-1.8.0-openjdk-amd64/include/ -I /usr/lib/jvm/java-1.8.0-openjdk-amd64/include/linux/ -fPIC nativeTest.c -o libnativeTest.so
 ```
 
 > 注意點：在Java程序中聲明`native`函數時，最好聲明成`static`靜態函數，這樣在調用時可以不用實例化對象
@@ -98,12 +93,12 @@ env指向一个`JNIEnv`结构体类型对象
 classname为对应的Java类名，由于JNINativeMethod中使用的函数名并非全路径名，所以要指明是哪个类  
 
 Java层通过System.loadLibrary加载完JNI动态库后，紧接着就会查找该库中一个叫JNI_OnLoad的函数，如果有，就调用它，而动态注册的工作就是在这里完成的。  
+
 ## 数据类型转换
 
 除了Java中基本数据类型数组、Class、String和Throwable外，其余所有Java对象的数据类型在JNI中都用jobject表示。  
 
 ## JNIEnv
 
-
-
+`JNIEnv`是一个与线程相关的代表JNI环境的结构体。
 
