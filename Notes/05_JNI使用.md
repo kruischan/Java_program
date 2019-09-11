@@ -106,3 +106,13 @@ Java层通过System.loadLibrary加载完JNI动态库后，紧接着就会查找�
 
 JNI技术中将参数类型和返回值的类型的组合作为一个函数的签名信息，这是为了应对Java中的函数重载。
 
+函数签名信息很容易写错，Java提供了一个叫`javap`的工具能帮助生成函数的签名信息，用法为 `javap -s -p xxx`  
+
+> xxx为编译后的class文件，s表示输出内部数据类型的签名信息，p表示打印所有的函数和成员的签名信息，默认只会打印public成员和函数的签名信息  
+
+## **垃圾回收**
+
+Java中创建的对象最后是由垃圾回收器来回收和释放内存的。  
+
+JNI机制提供了三种类型引用：Local Reference、Global Reference和Weak Global Reference
+
